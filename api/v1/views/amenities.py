@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""view for State objects that handles all default RESTFul API actions"""
+"""view for Amenity objects that handles all default RESTFul API actions"""
 from flask import jsonify, abort, make_response, request
 from models.amenity import Amenity
 from models import storage
@@ -63,6 +63,6 @@ def update_amenity(amenity_id):
         abort(400, description='Not a JSON')
     for key, value in kwargs.items():
         if key not in ['id', 'created_at', 'updated_at']:
-            setattr(state, key, value)
+            setattr(amenity, key, value)
     amenity.save()
     return jsonify(amenity.to_dict())
