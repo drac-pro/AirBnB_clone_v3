@@ -10,7 +10,7 @@ app.register_blueprint(app_views)
 
 
 @app.teardown_appcontext
-def teardownDBsession(exception):
+def close_DBsession(exception):
     """close DB session"""
     storage.close()
 
@@ -18,4 +18,4 @@ def teardownDBsession(exception):
 if __name__ == "__main__":
     host = getenv("HBNB_API_HOST", "0.0.0.0")
     port = getenv("HBNB_API_PORT", "5000")
-    app.run(host, port, threaded=True)
+    app.run(host=host, port=port, threaded=True)
