@@ -42,7 +42,7 @@ def delete_place_amenity(place_id, amenity_id):
         if amenity_id not in place.amenity_ids:
             abort(404)
         place.amenity_ids.remove(amenity_id)
-    return jsonify({})
+    return jsonify({}), 200
 
 
 @app_views.route('/places/<place_id>/amenities/<amenity_id>',
