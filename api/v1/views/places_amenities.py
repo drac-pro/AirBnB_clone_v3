@@ -35,7 +35,7 @@ def delete_place_amenity(place_id, amenity_id):
     if not amenity:
         abort(404)
     if storage_t == 'db':
-        if anenity not in place.amenities:
+        if amenity not in place.amenities:
             abort(404)
         place.amenities.remove(amenity)
     else:
@@ -43,7 +43,7 @@ def delete_place_amenity(place_id, amenity_id):
             abort(404)
         place.amenity_ids.remove(amenity_id)
     storage.save()
-    return make_response(jsonify({}), 200)
+    return jsonify({})
 
 
 @app_views.route('/places/<place_id>/amenities/<amenity_id>',
@@ -58,11 +58,11 @@ def add_place_amenity(place_id, amenity_id):
         abort(404)
     if storage_t == 'db':
         if amenity in place.amenities:
-            return make_response(jsonify(amenity.to_dict()), 200)
+            return jsonify(amenity.to_dict())
         place.amenities.append(amenity)
     else:
         if amenity_id in place.amenity_ids:
-            return make_response(jsonify(amenity.to_dict()), 200)
+            return jsonify(amenity.to_dict())
         place.amenity_ids.append(amenity_id)
     storage.save()
     return make_response(jsonify(amenity.to_dict()), 201)
