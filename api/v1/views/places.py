@@ -3,6 +3,7 @@
 from flask import jsonify, abort, make_response, request
 from models.place import Place
 from models.city import City
+from models.user import User
 from models import storage
 from api.v1.views import app_views
 
@@ -51,9 +52,14 @@ def create_place(city_id):
     kwargs = request.get_json(silent=True)
     if not kwargs:
         abort(400, description='Not a JSON')
-    elif 'user_id' not in kwargs.keys():
+    if 'user_id' not in kwargs.keys():
         abort(400, description='Missing user_id')
-    elif 'name' not in kwargs.keys():
+
+    user = storage.get(User, kwargs.user_id)
+    if not user:
+        abort(404)
+
+    if 'name' not in kwargs.keys():
         abort(400, description='Missing name')
     kwargs['city_id'] = city_id
     place = Place(**kwargs)
