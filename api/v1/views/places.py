@@ -130,10 +130,10 @@ def search_place():
     if amenities:
         if not result:
             result = storage.all(Place).values()
-        amenity_objs = {storage.get(Amenity, amenity_id) for amenity_id
-                        in amenities}
-        for place in result:
-            if not amenity_objs.issubset({amenity in place.amenities}):
-                result.remove(place)
+        amenity_objs = [storage.get(Amenity, amenity_id) for amenity_id
+                        in amenities]
+        result[:] = [place for place in result if
+                     all(amenity in place.amenities
+                         for amenity in amenities_obj)]
 
     return jsonify(list(map(lambda amenity: amenity.to_dict(), result)))
