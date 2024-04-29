@@ -93,7 +93,7 @@ def search_place():
     keys that can be in the body:
     states: list of State ids
     cities: list of City ids
-    amenities: list of Amenity ids
+    amenities: list of Amenity ids.
     """
     prompts = request.get_json(silent=True)
     if prompts is None:
