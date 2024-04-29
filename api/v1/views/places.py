@@ -99,12 +99,13 @@ def search_place():
     if prompts is None:
         abort(400, description='Not a JSON')
 
-    if prompts:
+    if prompts and len(prompts):
         states = prompts.get('states', None)
         cities = prompts.get('cities', None)
         amenities = prompts.get('amenities', None)
 
-    if not prompts or (not states and not cities and not amenities):
+    if not prompts or not len(prompts) or (
+            not states and not cities and not amenities):
         places_list = storage.all(Place).values()
         places = [place.to_dict() for place in places_list]
         return jsonify(places)
@@ -122,8 +123,9 @@ def search_place():
         for city_id in cities:
             city = storage.get(City, city_id)
             if city:
-                result.extend([place for place in
-                               city.places if place not in result])
+                for place in city.places:
+                    if place not in result:
+                        result.append(place)
 
     if amenities:
         if not result:
