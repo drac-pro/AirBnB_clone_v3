@@ -125,14 +125,11 @@ def search_place():
 
     if isinstance(amenities, list):
         if not result:
-            result = storage.all(Place).values()
-        else:
-            result = list(result)
-        amenity_objs = [storage.get(Amenity, amenity_id) for
-                        amenity_id in amenities]
-        result = [place for place in result if
-                  all(amenity in place.amenities
-                      for amenity in amenity_objs)]
+            result = set(storage.all(Place).values())
+        amenity_objs = set(storage.get(Amenity, amenity_id) for
+                           amenity_id in amenities)
+        result = {place for place in result if
+                  amenity_objs.issubset(place.amenities)}
 
     places = []
     for place in result:
