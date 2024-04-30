@@ -130,6 +130,6 @@ def search_place():
                         amenity_id in prompts['amenities']]
         result = [place for place in result if
                   all([amenity in place.amenities
-                      for amenity in amenity_objs])
+                      for amenity in amenity_objs])]
 
     return jsonify([place.to_dict() for place in result])
