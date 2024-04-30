@@ -127,7 +127,7 @@ def search_place():
         if result == []:
             result = storage.all(Place).values()
         amenities = [storage.get(Amenity, amenity_id) for
-                        amenity_id in prompts['amenities']]
+                     amenity_id in prompts['amenities']]
         result = [place for place in result if
                   all([amenity in place.amenities
                       for amenity in amenities])]
