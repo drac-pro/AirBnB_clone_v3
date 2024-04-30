@@ -137,7 +137,7 @@ def search_place():
     places = []
     for place in result:
         place_dict = place.to_dict()
-        place_dict.pop('amenities', None)
+        #place_dict.pop('amenities', None)
         places.append(place_dict)
 
     return jsonify(places)
