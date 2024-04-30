@@ -108,24 +108,24 @@ def search_place():
     result = []
 
     if prompts.get('states'):
-        for state_id in prompts.get('states'):
+        for state_id in prompts['states']:
             state = storage.get(State, state_id)
             if state:
                 for city in state.cities:
                     result.extend(city.places)
 
     if prompts.get('cities'):
-        for city_id in prompts.get('cities'):
+        for city_id in prompts['cities']:
             city = storage.get(City, city_id)
             if city:
                 for place in city.places:
                     if place not in result:
                         result.append(place)
 
-    if amenities:
-        if not result:
+    if promts.get('amenities'):
+        if result == []:
             result = storage.all(Place).values()
-        amenity_ids = prompts.get('amenities')
+        amenity_ids = prompts.['amenities']
         result = [place for place in result if
                   all(amenity.id in amenity_ids
                       for amenity in place.amenities)]
