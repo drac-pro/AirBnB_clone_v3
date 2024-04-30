@@ -107,7 +107,8 @@ def search_place():
     result = []
 
     if prompts.get('states'):
-        states = [storage.get(State, state_id) for state_id in promts['states']
+        states = [storage.get(State, state_id) for
+                  state_id in promts['states']]
         for state in states:
             if state:
                 for city in state.cities:
@@ -115,7 +116,7 @@ def search_place():
                         result.append(place)
 
     if prompts.get('cities'):
-        cities = [storage.get(City, city_id) for city_id in promts['cities']
+        cities = [storage.get(City, city_id) for city_id in promts['cities']]
         for city in cities:
             if city:
                 for place in city.places:
