@@ -101,23 +101,22 @@ def search_place():
 
     if not prompts or all(not prompts.get(key) for key in
                           ('states', 'cities', 'amenities')):
-        places_list = storage.all(Place).values()
-        places = [place.to_dict() for place in places_list]
-        return jsonify(places)
+        places = storage.all(Place).values()
+        return jsonify([place.to_dict() for place in places])
 
     result = []
 
     if prompts.get('states'):
-        for state_id in prompts['states']:
-            state = storage.get(State, state_id)
+        states = [storage.get(State, state_id) for state_id in promts['states']
+        for state in states:
             if state:
                 for city in state.cities:
                     for place in city.places:
                         result.append(place)
 
     if prompts.get('cities'):
-        for city_id in prompts['cities']:
-            city = storage.get(City, city_id)
+        cities = [storage.get(City, city_id) for city_id in promts['cities']
+        for city in cities:
             if city:
                 for place in city.places:
                     if place not in result:
@@ -126,10 +125,10 @@ def search_place():
     if promts.get('amenities'):
         if result == []:
             result = storage.all(Place).values()
-        amenity_objs = [storage.get(Amenity, amenity_id) for
+        amenities = [storage.get(Amenity, amenity_id) for
                         amenity_id in prompts['amenities']]
         result = [place for place in result if
                   all([amenity in place.amenities
-                      for amenity in amenity_objs])]
+                      for amenity in amenities])]
 
     return jsonify([place.to_dict() for place in result])
