@@ -131,13 +131,13 @@ def search_place():
         amenity_objs = [storage.get(Amenity, amenity_id) for
                         amenity_id in amenities]
         result = [place for place in result if
-                  all([amenity in place.amenities
-                      for amenity in amenity_objs])]
+                  all(amenity in place.amenities
+                      for amenity in amenity_objs)]
 
     places = []
     for place in result:
         place_dict = place.to_dict()
-        #place_dict.pop('amenities', None)
+        place_dict.pop('amenities', None)
         places.append(place_dict)
 
     return jsonify(places)
