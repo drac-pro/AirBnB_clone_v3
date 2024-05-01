@@ -104,7 +104,7 @@ class TestDBStorage(unittest.TestCase):
         """Test the count method in DBStorage"""
         initial_count_all = models.storage.count()
         initial_count_states = models.storage.count(State)
-        state = State("Toronto")
+        state = State(name="Toronto")
         state.save()
         new_count_all = models.storage.count()
         new_count_states = models.storage.count(State)
