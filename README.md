@@ -165,4 +165,4 @@ Public Domain. No copy write protection.
 
 # AirBnB clone - RESTful API
 
-![RESTful API - Flask](https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2020/9/02078cd7f0573885c85a225c7436584a5afea1f9.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUSBVO6H7D%2F20240426%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240426T102100Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=961416ae45accc9380eca6ece398fc4fef4030ae6c54c66bbc5ef56eeac9e64f)
+![RESTful API - Flask](https://camo.githubusercontent.com/f16a6c187c1e7771f95d405b505e9e103f6cb2c17575a87c6f5097f839dc8c52/68747470733a2f2f692e696d6775722e636f6d2f66636c345052592e706e67)
